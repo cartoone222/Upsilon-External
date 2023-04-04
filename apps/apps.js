@@ -10,5 +10,6 @@ angular.module('nwas').service('apps', function() {
     { name: "BadApple", description: {en: "Bad Apple demo", fr: "Démo Bad Apple"} },
     { name: "UnitCircle", description: {en: "Unit circle", fr: "Cercle trigonométrique"} },
     { name: "CHIP-8", description: {en: "CHIP-8 interpreter", fr: "Interpréteur CHIP-8"} },
+    { name: "tic-tac-tow", description: {en: "the tic-tac-tow game for numworks", fr: "le jeux du morpion pour numworks"} },
   ];
 });
