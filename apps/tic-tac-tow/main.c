@@ -96,14 +96,6 @@ int victoire(int *T){
     return 0;
 }
 
-bool valueinarray(int val, int *arr){
-    int i;
-    for(i = 0; i < 9; i++){
-        if(arr[i] == val) return true;
-    }
-    return false;
-}
-
 void main_game(void){
 
     while (extapp_scanKeyboard()) {
@@ -116,14 +108,10 @@ void main_game(void){
     int plat[9] = {0,0,0,0,0,0,0,0,0};
     int tour = 1;
 
-    while (victoire(plat) == 0 && valueinarray(0, plat)){
+    while (victoire(plat) == 0){
         int key = extapp_getKey(0,false);
 
-        if (tour == 1){
-            tour = 2;
-        }else{
-            tour = 1;
-        }
+
 
         while (key == 0){
             key = extapp_getKey(0,false);
@@ -131,148 +119,170 @@ void main_game(void){
         
         if(key == 5){
             return;
-        } else if (key == 49){
+        } else if (key == 49 && plat[6] == 0){
             if (tour == 1){
                 pion_1(0,2);
                 plat[6] = 1;
+                tour = 2;
             } else {
                 pion_2(0,2);
                 plat[6] = 2;
+                tour = 1;
             }
-        } else if (key == 50){
+        } else if (key == 50 && plat[7] == 0){
             if (tour == 1){
                 pion_1(1,2);
                 plat[7] = 1;
+                tour = 2;
             } else {
                 pion_2(1,2);
                 plat[7] = 2;
+                tour = 1;
             }
-        } else if (key == 51){
+        } else if (key == 51 && plat[8] == 0){
             if (tour == 1){
                 pion_1(2,2);
                 plat[8] = 1;
+                tour = 2;
             }else {
                 pion_2(2,2);
                 plat[8] = 2;
+                tour = 1;
             }
-        } else if (key == 52){
+        } else if (key == 52 && plat[3] == 0){
             if (tour == 1){
                 pion_1(0,1);
                 plat[3] = 1;
+                tour = 2;
             }else {
                 pion_2(0,1);
                 plat[3] = 2;
+                tour = 1;
             }
-        } else if (key == 53){
+        } else if (key == 53 && plat[4] == 0){
             if (tour == 1){
                 pion_1(1,1);
                 plat[4] = 1;
+                tour = 2;
             }else {
                 pion_2(1,1);
                 plat[4] = 2;
+                tour = 1;
             }
-        } else if (key == 54){
+        } else if (key == 54 && plat[5] == 0){
             if (tour == 1){
                 pion_1(2,1);
                 plat[5] = 1;
+                tour = 2;
             }else {
                 pion_2(2,1);
                 plat[5] = 2;
+                tour = 1;
             }
-        } else if (key == 55){
+        } else if (key == 55 && plat[0] == 0){
             if (tour == 1){
                 pion_1(0,0);
                 plat[0] = 1;
+                tour = 2;
             }else {
                 pion_2(0,0);
                 plat[0] = 2;
+                tour = 1;
             }
-        } else if (key == 56){
+        } else if (key == 56 && plat[1] == 0){
             if (tour == 1){
                 pion_1(1,0);
                 plat[1] = 1;
+                tour = 2;
             }else {
                 pion_2(1,0);
                 plat[1] = 2;
+                tour = 1;
             }
-        } else if (key == 57){
+        } else if (key == 57 && plat[2] == 0){
             if (tour == 1){
                 pion_1(2,0);
                 plat[2] = 1;
+                tour = 2;
             }else {
                 pion_2(2,0);
                 plat[2] = 2;
+                tour = 1;
             }
         }
     }
 
     if (victoire(plat) == 1){
         extapp_drawTextLarge("victoir joueur rond ", 70, 20 * 5, 0xffff,  0x1B9B, false);
-    } else if (victoire(plat) == 2){
+    } else {
         extapp_drawTextLarge("victoir joueur croix", 70, 20 * 5, 0xffff,  0x1B9B, false);
-    }else {
-        extapp_drawTextLarge("matche nule", 80, 20 * 5, 0xffff,  0x1B9B, false);
     }
 
     extapp_msleep(5000);
 }
 
 void extapp_main(void) {
+    while (true){
+            init_app();
+            //titel
+            extapp_drawTextLarge("       MORPION MASTER!", 0, 20 * 2, 0xffff,  0x343C, false);
+            extapp_drawTextLarge("+ play", 110, 20 * 5, 0xffff,  0x1B9B, false);
+            extapp_drawTextLarge("+ exit", 110, 20 * 6, 0xffff,  0x343C, false);
+            extapp_drawTextLarge("                     by cartoone", 0, 20 * 11, 0xffff,  0x343C, false);
 
-while (true){
-        init_app();
-        //titel
-        extapp_drawTextLarge("       MORPION MASTER!", 0, 20 * 2, 0xffff,  0x343C, false);
-        extapp_drawTextLarge("+ play", 110, 20 * 5, 0xffff,  0x1B9B, false);
-        extapp_drawTextLarge("+ exit", 110, 20 * 6, 0xffff,  0x343C, false);
-        extapp_drawTextLarge("                     by cartoone", 0, 20 * 11, 0xffff,  0x343C, false);
+            // main
 
-        // main
+            int key = extapp_getKey(0,false);
+            int menu = 0;
 
-        int key = extapp_getKey(0,false);
-        int menu = 0;
+            while (true){
+                extapp_msleep(10);
+                key = extapp_getKey(0,false);
 
-        while (true){
-            extapp_msleep(10);
-            key = extapp_getKey(0,false);
+                /*
+                char str[12];
+                sprintf(str, "%d", key);
 
-            if (key == 2){
+                extapp_drawTextLarge("              ", 0, 20 * 2, 0xffff,  0x343C, false);
+                extapp_drawTextLarge(str, 0, 20 * 2, 0xffff,  0x343C, false); */
 
-                if (menu < 2){
-                    menu ++;
-                }
-            
-            } else if (key == 1){
-            
-                if (0 < menu){
-                    menu --;
-                }
-            
-            } else if (key == 4){
-                if (menu == 0){
-                    
-                    main_game();
-                    break;
-                } else {
+                if (key == 2){
+
+                    if (menu < 2){
+                        menu ++;
+                    }
+                
+                } else if (key == 1){
+                
+                    if (0 < menu){
+                        menu --;
+                    }
+                
+                } else if (key == 4){
+                    if (menu == 0){
+                        
+                        main_game();
+                        break;
+                    } else {
+                        return;
+                    }
+
+                } else if (key == 5){
+
                     return;
+                
                 }
 
-            } else if (key == 5){
+                if (menu == 0){
+                    extapp_drawTextLarge("+ play", 110, 20 * 5, 0xffff,  0x1B9B, false);
+                    extapp_drawTextLarge("+ exit", 110, 20 * 6, 0xffff,  0x343C, false);
+                } else if (menu == 1){
+                    extapp_drawTextLarge("+ play", 110, 20 * 5, 0xffff,  0x343C, false);
+                    extapp_drawTextLarge("+ exit", 110, 20 * 6, 0xffff,  0x1B9B, false);
+                }
+            }
 
-                return;
             
-            }
-
-            if (menu == 0){
-                extapp_drawTextLarge("+ play", 110, 20 * 5, 0xffff,  0x1B9B, false);
-                extapp_drawTextLarge("+ exit", 110, 20 * 6, 0xffff,  0x343C, false);
-            } else if (menu == 1){
-                extapp_drawTextLarge("+ play", 110, 20 * 5, 0xffff,  0x343C, false);
-                extapp_drawTextLarge("+ exit", 110, 20 * 6, 0xffff,  0x1B9B, false);
-            }
         }
-
-        
-    }
-    return;
+        return;
 }
